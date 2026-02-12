@@ -34,14 +34,14 @@ export default function Home() {
             </div>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button asChild size="lg" className="bg-warm text-warm-foreground hover:bg-warm/90">
-                <Link href="/experience/first-touch">
-                  Continue the Experience
+                <Link href="/story">
+                  See the Visual Story
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/learn">
-                  Explore the Method
+                <Link href="/experience/first-touch">
+                  Try a Guided Experience
                 </Link>
               </Button>
             </div>

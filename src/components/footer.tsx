@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Feather } from "lucide-react";
+import { ThemeToggle } from "./theme-toggle";
 
 const footerLinks = [
   {
@@ -74,6 +77,9 @@ export function Footer() {
           <p className="text-xs text-muted-foreground">
             Developed by John Appleton. All rights reserved.
           </p>
+        </div>
+        <div className="mt-6 flex justify-center border-t border-border/40 pt-6">
+          <ThemeToggle />
         </div>
       </div>
     </footer>

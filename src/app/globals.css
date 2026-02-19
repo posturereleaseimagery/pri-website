@@ -82,6 +82,36 @@
   --chart-5: #7a8f72;
 }
 
+[data-theme="light"] {
+  --background: #faf8f5;
+  --foreground: #2c2418;
+  --card: #ffffff;
+  --card-foreground: #2c2418;
+  --popover: #ffffff;
+  --popover-foreground: #2c2418;
+  --primary: #5c4a32;
+  --primary-foreground: #faf8f5;
+  --secondary: #f0ebe3;
+  --secondary-foreground: #3d3225;
+  --muted: #f0ebe3;
+  --muted-foreground: #8a7d6b;
+  --accent: #e8e0d4;
+  --accent-foreground: #3d3225;
+  --destructive: #b54a32;
+  --border: #e0d8cc;
+  --input: #e0d8cc;
+  --ring: #a08c72;
+  --warm: #c4956a;
+  --warm-foreground: #ffffff;
+  --sage: #7a8f72;
+  --sage-foreground: #ffffff;
+  --chart-1: #c4956a;
+  --chart-2: #7a8f72;
+  --chart-3: #5c4a32;
+  --chart-4: #d4a574;
+  --chart-5: #8fa587;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

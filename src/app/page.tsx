@@ -10,40 +10,49 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-warm/5 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-20 sm:px-6 sm:pt-28">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="mb-4 text-sm font-medium uppercase tracking-widest text-warm">
-              A 30-Second Invitation
-            </p>
-            <h1 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
-              Close your eyes.
-              <br />
-              <span className="text-muted-foreground">Feel the back of your body.</span>
-            </h1>
-            <div className="mx-auto mt-8 max-w-lg space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              <p>
-                Notice the surface that touches the chair, the air, the fabric of your clothing.
-                The whole back of you — from your heels to the crown of your head.
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="flex-1 text-center md:text-left">
+              <p className="mb-4 text-sm font-medium uppercase tracking-widest text-warm">
+                A 30-Second Invitation
               </p>
-              <p>
-                Now notice the front. Your face, your chest, your palms, your belly.
-                Feel how different these two surfaces are.
-              </p>
-              <p className="font-medium text-foreground">
-                You have just begun Posture Release Imagery.
-              </p>
+              <h1 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
+                Close your eyes.
+                <br />
+                <span className="text-muted-foreground">Feel the back of your body.</span>
+              </h1>
+              <div className="mt-8 max-w-lg space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                <p>
+                  Notice the surface that touches the chair, the air, the fabric of your clothing.
+                  The whole back of you — from your heels to the crown of your head.
+                </p>
+                <p>
+                  Now notice the front. Your face, your chest, your palms, your belly.
+                  Feel how different these two surfaces are.
+                </p>
+                <p className="font-medium text-foreground">
+                  You have just begun Posture Release Imagery.
+                </p>
+              </div>
+              <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-start md:justify-start">
+                <Button asChild size="lg" className="bg-warm text-warm-foreground hover:bg-warm/90">
+                  <Link href="/story">
+                    See the Visual Story
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link href="/experience/first-touch">
+                    Try a Guided Experience
+                  </Link>
+                </Button>
+              </div>
             </div>
-            <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Button asChild size="lg" className="bg-warm text-warm-foreground hover:bg-warm/90">
-                <Link href="/story">
-                  See the Visual Story
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/experience/first-touch">
-                  Try a Guided Experience
-                </Link>
-              </Button>
+            <div className="flex-shrink-0 w-[500px]">
+              <img 
+                src="/images/chair.png" 
+                alt="Posture Release Imagery"
+                className="w-full h-auto object-contain rounded-[25px]"
+              />
             </div>
           </div>
         </div>
@@ -68,27 +77,41 @@ export default function Home() {
                 icon: Eye,
                 title: "Sensation First",
                 desc: "Begin with what you can feel right now. Your body surfaces — back and front — are the foundation of posture.",
+                image: "/images/tetrapods.png",
               },
               {
                 icon: Layers,
                 title: "Imagery, Not Exercise",
                 desc: "Guided imaginative experiences reshape your relationship to gravity. No physical effort required.",
+                image: "/images/monkandFollowers2.jpg",
               },
               {
                 icon: Sparkles,
                 title: "Rooted in Science",
                 desc: "Built on evolutionary development, embryology, and decades of somatic research from Alexander Technique to tensegrity.",
+                image: "/images/AnimalsExpanded.jpg",
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-xl border border-border/60 bg-card p-6 shadow-sm"
+                className="rounded-xl border border-border/60 bg-card shadow-sm overflow-hidden"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warm/10">
-                  <item.icon className="h-5 w-5 text-warm" />
+                {item.image && (
+                  <div className="w-full">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className={`w-full h-auto object-cover ${item.title === "Imagery, Not Exercise" ? "scale-x-[-1]" : ""}`}
+                    />
+                  </div>
+                )}
+                <div className="p-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warm/10">
+                    <item.icon className="h-5 w-5 text-warm" />
+                  </div>
+                  <h3 className="mt-4 text-base font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
                 </div>
-                <h3 className="mt-4 text-base font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -106,7 +129,14 @@ export default function Home() {
               Whether you are new to somatic work or a seasoned practitioner, there is a path for you.
             </p>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="mt-10 mb-10 flex justify-center">
+            <img 
+              src="/images/image22.png" 
+              alt="Two Ways In"
+              className="w-full h-auto object-cover rounded-xl max-w-3xl"
+            />
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
             <Link
               href="/learn/beginners"
               className="group rounded-xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
@@ -149,13 +179,20 @@ export default function Home() {
       <section className="border-t border-border/60 bg-secondary/30">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              The Learning Journey
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              PRI unfolds in layers. Each step builds on the last.
-            </p>
+          <div className="mb-6 flex justify-center">
+            <img 
+              src="/logo.png" 
+              alt="Learning Journey"
+              className="w-[150px] h-[150px] object-contain"
+            />
           </div>
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+            The Learning Journey
+          </h2>
+          <p className="mt-3 text-muted-foreground">
+            PRI unfolds in layers. Each step builds on the last.
+          </p>
+        </div>
           <div className="mx-auto mt-10 max-w-2xl">
             {[
               { step: "1", title: "Body Surface Sensation", desc: "Feel the distinction between your back and front surfaces.", href: "/learn/surfaces" },
@@ -187,32 +224,54 @@ export default function Home() {
       <section className="border-t border-border/60">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-xl border border-border/60 bg-card p-8 shadow-sm">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warm/10">
-                <BookOpen className="h-5 w-5 text-warm" />
+            <div className="rounded-xl border border-border/60 bg-card shadow-sm overflow-hidden">
+              <div className="flex flex-col md:flex-row h-full">
+                <div className="flex-1 p-8">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warm/10">
+                    <BookOpen className="h-5 w-5 text-warm" />
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold">The Book</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    A comprehensive guide to Posture Release Imagery — the theory, the practice,
+                    and the evolutionary science behind it. Best approached after you have felt
+                    the method for yourself.
+                  </p>
+                  <Button asChild variant="outline" className="mt-5">
+                    <Link href="/book">Learn More</Link>
+                  </Button>
+                </div>
+                <div className="flex-shrink-0 w-full md:w-1/2">
+                  <img 
+                    src="/images/Cover_Front.jpg" 
+                    alt="The Book"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
-              <h3 className="mt-4 text-xl font-semibold">The Book</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                A comprehensive guide to Posture Release Imagery — the theory, the practice,
-                and the evolutionary science behind it. Best approached after you have felt
-                the method for yourself.
-              </p>
-              <Button asChild variant="outline" className="mt-5">
-                <Link href="/book">Learn More</Link>
-              </Button>
             </div>
-            <div className="rounded-xl border border-border/60 bg-card p-8 shadow-sm">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sage/10">
-                <GraduationCap className="h-5 w-5 text-sage" />
+            <div className="rounded-xl border border-border/60 bg-card shadow-sm overflow-hidden">
+              <div className="flex flex-col md:flex-row">
+                <div className="flex-1 p-8">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sage/10">
+                    <GraduationCap className="h-5 w-5 text-sage" />
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold">Courses & Workshops</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    Structured learning for beginners and professionals. From introductory
+                    foundations to advanced practitioner training, guided by John Appleton.
+                  </p>
+                  <Button asChild variant="outline" className="mt-5">
+                    <Link href="/courses">View Courses</Link>
+                  </Button>
+                </div>
+                <div className="flex-shrink-0 w-full md:w-1/2 self-stretch">
+                  <img 
+                    src="/images/courses.png" 
+                    alt="Courses & Workshops"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
               </div>
-              <h3 className="mt-4 text-xl font-semibold">Courses & Workshops</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Structured learning for beginners and professionals. From introductory
-                foundations to advanced practitioner training, guided by John Appleton.
-              </p>
-              <Button asChild variant="outline" className="mt-5">
-                <Link href="/courses">View Courses</Link>
-              </Button>
             </div>
           </div>
         </div>
@@ -221,7 +280,9 @@ export default function Home() {
       {/* Email Capture */}
       <section className="border-t border-border/60 bg-secondary/30">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-          <EmailCapture />
+          <div className="mx-auto md:max-w-[60%]">
+            <EmailCapture showBanner={true} />
+          </div>
         </div>
       </section>
     </>

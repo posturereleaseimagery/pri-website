@@ -17,6 +17,8 @@ interface ExperienceLayoutProps {
   steps: ExperienceStep[];
   nextExperience?: { label: string; href: string };
   prevExperience?: { label: string; href: string };
+  image?: string;
+  imageLayout?: "right" | "top";
 }
 
 export function ExperienceLayout({
@@ -25,6 +27,8 @@ export function ExperienceLayout({
   steps,
   nextExperience,
   prevExperience,
+  image,
+  imageLayout = "right",
 }: ExperienceLayoutProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [started, setStarted] = useState(false);
@@ -32,6 +36,15 @@ export function ExperienceLayout({
   if (!started) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-4">
+        {image && (
+          <div className="mb-8 mt-5">
+            <img 
+              src={image} 
+              alt={title}
+              className="h-auto w-auto rounded-[25px]"
+            />
+          </div>
+        )}
         <div className="mx-auto max-w-lg text-center">
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-warm">
             Guided Experience
@@ -59,10 +72,20 @@ export function ExperienceLayout({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="flex min-h-[50vh] flex-col items-center justify-center">
-        <div className="mx-auto max-w-lg text-center">
+      {imageLayout === "top" && image && (
+        <div className="flex justify-center mb-12 mt-5">
+          <img 
+            src={image} 
+            alt={title}
+            className="h-auto w-auto rounded-[25px]"
+          />
+        </div>
+      )}
+      
+      <div className={`flex min-h-[50vh] ${imageLayout === "right" ? "flex-col md:flex-row" : "flex-col"} items-center justify-center ${imageLayout === "right" ? "gap-12" : ""}`}>
+        <div className={`flex-1 text-center ${imageLayout === "right" ? "md:text-left" : ""}`}>
           {/* Progress */}
-          <div className="mb-8 flex items-center justify-center gap-1.5">
+          <div className={`mb-8 flex items-center ${imageLayout === "right" ? "justify-center md:justify-start" : "justify-center"} gap-1.5`}>
             {steps.map((_, i) => (
               <div
                 key={i}
@@ -88,7 +111,7 @@ export function ExperienceLayout({
           )}
 
           {/* Navigation */}
-          <div className="mt-10 flex items-center justify-center gap-4">
+          <div className={`mt-10 flex items-center ${imageLayout === "right" ? "justify-center md:justify-start" : "justify-center"} gap-4`}>
             {currentStep > 0 && (
               <Button
                 variant="ghost"
@@ -107,7 +130,7 @@ export function ExperienceLayout({
                 <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             ) : (
-              <div className="flex flex-col items-center gap-4">
+              <div className={`flex flex-col ${imageLayout === "right" ? "md:items-start" : ""} items-center gap-4`}>
                 <p className="text-sm font-medium text-sage">Experience complete.</p>
                 <div className="flex gap-3">
                   {nextExperience && (
@@ -126,6 +149,17 @@ export function ExperienceLayout({
             )}
           </div>
         </div>
+        
+        {/* Image on the right (only for right layout) */}
+        {imageLayout === "right" && image && (
+          <div className="flex-shrink-0">
+            <img 
+              src={image} 
+              alt={title}
+              className="h-auto w-auto object-contain"
+            />
+          </div>
+        )}
       </div>
 
       {/* Post-experience email capture */}

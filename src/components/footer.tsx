@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Feather } from "lucide-react";
+import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
 
 const footerLinks = [
@@ -69,7 +69,13 @@ export function Footer() {
         </div>
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 sm:flex-row">
           <div className="flex items-center gap-2">
-            <Feather className="h-5 w-5 text-warm" />
+            <Image 
+              src="/logo.png" 
+              alt="Posture Release Imagery Logo" 
+              width={50} 
+              height={50} 
+              className="h-12 w-12"
+            />
             <span className="text-sm font-medium text-primary">
               Posture Release Imagery
             </span>

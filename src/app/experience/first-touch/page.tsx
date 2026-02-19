@@ -35,6 +35,7 @@ export default function FirstTouchPage() {
       subtitle="A 60-second introduction to body surface awareness. No theory — just sensation."
       steps={steps}
       nextExperience={{ label: "Next: Surfaces", href: "/experience/surfaces" }}
+      image="/images/chair.png"
     />
   );
 }

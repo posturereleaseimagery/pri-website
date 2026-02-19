@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
-import { Menu, X, Feather } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
@@ -52,7 +53,13 @@ export function Navigation() {
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <Feather className="h-6 w-6 text-warm" />
+          <Image 
+            src="/logo.png" 
+            alt="Posture Release Imagery Logo" 
+            width={50} 
+            height={50} 
+            className="h-12 w-12"
+          />
           <span className="text-lg font-semibold tracking-tight text-primary">
             Posture Release Imagery
           </span>
@@ -102,7 +109,13 @@ export function Navigation() {
           </SheetTrigger>
           <SheetContent side="right" className="w-[280px] overflow-y-auto">
             <SheetTitle className="flex items-center gap-2 px-2 pb-4">
-              <Feather className="h-5 w-5 text-warm" />
+              <Image 
+                src="/logo.png" 
+                alt="Posture Release Imagery Logo" 
+                width={50} 
+                height={50} 
+                className="h-12 w-12"
+              />
               <span className="text-base font-semibold">PRI</span>
             </SheetTitle>
             <nav className="flex flex-col gap-1">

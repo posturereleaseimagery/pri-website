@@ -41,6 +41,8 @@ export default function ImageryPage() {
       subtitle="Work with the egg, the lamb, and other imaginative forms that speak directly to your body's deep intelligence."
       steps={steps}
       prevExperience={{ label: "The Seam", href: "/experience/seam" }}
+      image="/images/seam.jpg"
+      imageLayout="top"
     />
   );
 }

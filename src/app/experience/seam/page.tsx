@@ -42,6 +42,8 @@ export default function SeamPage() {
       steps={steps}
       prevExperience={{ label: "Surfaces", href: "/experience/surfaces" }}
       nextExperience={{ label: "Next: Imagery", href: "/experience/imagery" }}
+      image="/images/seam.jpg"
+      imageLayout="top"
     />
   );
 }

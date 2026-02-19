@@ -40,6 +40,14 @@ const experiences = [
 export default function ExperiencePage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="flex justify-center mb-12">
+        <img 
+          src="/images/seam.jpg" 
+          alt="Guided Experiences"
+          className="h-auto w-auto rounded-[25px]"
+        />
+      </div>
+      
       <div className="mx-auto max-w-2xl text-center">
         <p className="mb-3 text-sm font-medium uppercase tracking-widest text-warm">
           Guided Experiences

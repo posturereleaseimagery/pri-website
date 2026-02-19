@@ -39,6 +39,8 @@ export default function SurfacesPage() {
       steps={steps}
       prevExperience={{ label: "First Touch", href: "/experience/first-touch" }}
       nextExperience={{ label: "Next: The Seam", href: "/experience/seam" }}
+      image="/images/dvsurfaces.png"
+      imageLayout="top"
     />
   );
 }

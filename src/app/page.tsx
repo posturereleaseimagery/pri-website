@@ -106,10 +106,7 @@ export default function Home() {
                   </div>
                 )}
                 <div className="p-6">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warm/10">
-                    <item.icon className="h-5 w-5 text-warm" />
-                  </div>
-                  <h3 className="mt-4 text-base font-semibold">{item.title}</h3>
+                  <h3 className="text-base font-semibold">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
                 </div>
               </div>

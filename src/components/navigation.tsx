@@ -13,6 +13,7 @@ const navItems = [
     href: "/experience",
     children: [
       { label: "Visual Introduction", href: "/story" },
+      { label: "Visual Introduction 2", href: "/story2" },
       { label: "First Touch", href: "/experience/first-touch" },
       { label: "Surfaces", href: "/experience/surfaces" },
       { label: "The Seam", href: "/experience/seam" },

@@ -37,11 +37,11 @@ export function ExperienceLayout({
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-4">
         {image && (
-          <div className="mb-8 mt-5">
+          <div className="mb-8 mt-10">
             <img 
               src={image} 
               alt={title}
-              className="h-auto w-auto rounded-[25px]"
+              className="h-auto w-auto max-w-[700px] rounded-[25px]"
             />
           </div>
         )}
@@ -71,18 +71,18 @@ export function ExperienceLayout({
   const isLast = currentStep === steps.length - 1;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6">
       {imageLayout === "top" && image && (
-        <div className="flex justify-center mb-12 mt-5">
+        <div className="flex justify-center mb-12 mt-[40px]">
           <img 
             src={image} 
             alt={title}
-            className="h-auto w-auto rounded-[25px]"
+            className="h-auto w-auto max-w-[700px] rounded-[25px]"
           />
         </div>
       )}
       
-      <div className={`flex min-h-[50vh] ${imageLayout === "right" ? "flex-col md:flex-row" : "flex-col"} items-center justify-center ${imageLayout === "right" ? "gap-12" : ""}`}>
+      <div className={`flex min-h-[50vh] ${imageLayout === "right" ? "flex-col md:flex-row" : "flex-col"} items-center justify-center ${imageLayout === "right" ? "gap-12" : ""} ${imageLayout === "top" ? "max-w-[700px] mx-auto" : ""}`}>
         <div className={`flex-1 text-center ${imageLayout === "right" ? "md:text-left" : ""}`}>
           {/* Progress */}
           <div className={`mb-8 flex items-center ${imageLayout === "right" ? "justify-center md:justify-start" : "justify-center"} gap-1.5`}>
@@ -156,7 +156,7 @@ export function ExperienceLayout({
             <img 
               src={image} 
               alt={title}
-              className="h-auto w-auto object-contain"
+              className="h-auto w-auto max-h-[500px] object-contain rounded-[25px]"
             />
           </div>
         )}

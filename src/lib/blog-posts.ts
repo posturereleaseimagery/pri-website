@@ -37,6 +37,7 @@ function toArticle(post: Post): Article {
     readingTime,
     content,
     featured: false,
+    attachments: post.attachments,
   };
 }
 

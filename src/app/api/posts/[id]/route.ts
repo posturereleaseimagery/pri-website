@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readPosts, writePosts } from '../../../../lib/posts';
+import { readPosts, writePosts, Attachment } from '../../../../lib/posts';
 import fs from 'fs/promises';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
+
+type SavedAttachment = {
+  url: string;
+  mediaType: string;
+};
 
 export const runtime = 'nodejs';
 
@@ -22,6 +27,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       content: payload.content || existing.content,
       type: (payload.type as 'article' | 'exercise' | 'tidbit') || existing.type,
       images: payload.images !== undefined ? payload.images : existing.images,
+      attachments: payload.attachments !== undefined ? payload.attachments : existing.attachments,
       createdAt: payload.date ? new Date(payload.date).toISOString() : existing.createdAt,
       updatedAt: new Date().toISOString(),
     };
@@ -40,6 +46,7 @@ async function parsePostPayload(request: NextRequest): Promise<{
   images?: string[];
   tags?: string[];
   date?: string;
+  attachments?: Attachment[];
 }> {
   const contentType = request.headers.get('content-type') || '';
   if (contentType.includes('multipart/form-data')) {
@@ -55,6 +62,38 @@ async function parsePostPayload(request: NextRequest): Promise<{
         tags = [];
       }
     }
+    const attachmentEntries = formData.getAll('attachments');
+    const savedAttachments = (await Promise.all(
+      attachmentEntries.map((file) => saveFormFile(file as File))
+    )) as (SavedAttachment | undefined)[];
+    const uploadedAttachments = savedAttachments.filter((item): item is SavedAttachment => Boolean(item));
+
+    const existingAttachmentsRaw = formData.get('existingAttachments');
+    let existingAttachments: Attachment[] = [];
+    if (existingAttachmentsRaw && typeof existingAttachmentsRaw === 'string') {
+      try {
+        existingAttachments = JSON.parse(existingAttachmentsRaw) as Attachment[];
+      } catch {
+        existingAttachments = [];
+      }
+    }
+
+    const attachments: Attachment[] = [
+      ...existingAttachments,
+      ...uploadedAttachments.map((attachment) => ({
+        url: attachment.url,
+        mediaType: attachment.mediaType,
+        label: attachment.url.split('/').pop(),
+      })),
+    ];
+
+    const savedImages = (await Promise.all(
+      fileEntries.map((file) => saveFormFile(file as File))
+    )) as (SavedAttachment | undefined)[];
+    const uploadedImages = savedImages
+      .filter((item): item is SavedAttachment => Boolean(item))
+      .map((item) => item.url);
+
     return {
       title: getFormValue(formData.get('title')),
       content: getFormValue(formData.get('content')),
@@ -64,11 +103,10 @@ async function parsePostPayload(request: NextRequest): Promise<{
         ...(existingImagesRaw && typeof existingImagesRaw === 'string'
           ? (JSON.parse(existingImagesRaw) as string[])
           : []),
-        ...(await Promise.all(
-          fileEntries.map((file) => saveFormFile(file as File)).filter(Boolean)
-        )).filter(Boolean) as string[],
+        ...uploadedImages,
       ].filter(Boolean),
       tags,
+      attachments,
     };
   }
 
@@ -80,6 +118,7 @@ async function parsePostPayload(request: NextRequest): Promise<{
     date: body.date,
     images: Array.isArray(body.images) ? body.images : [],
     tags: Array.isArray(body.tags) ? body.tags : [],
+    attachments: Array.isArray(body.attachments) ? body.attachments : [],
   };
 }
 
@@ -88,7 +127,7 @@ function getFormValue(value: FormDataEntryValue | null) {
   return Array.isArray(value) ? value[0] : value;
 }
 
-async function saveFormFile(value: FormDataEntryValue | null) {
+async function saveFormFile(value: FormDataEntryValue | null): Promise<SavedAttachment | undefined> {
   if (!value || typeof value === 'string') return undefined;
   const file = value as File;
   const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
@@ -98,7 +137,10 @@ async function saveFormFile(value: FormDataEntryValue | null) {
   const filePath = path.join(uploadsDir, filename);
   const buffer = Buffer.from(await file.arrayBuffer());
   await fs.writeFile(filePath, buffer);
-  return `/uploads/${filename}`;
+  return {
+    url: `/uploads/${filename}`,
+    mediaType: file.type || (ext === '.pdf' ? 'application/pdf' : 'application/octet-stream'),
+  };
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {

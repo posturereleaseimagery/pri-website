@@ -30,6 +30,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <div className="min-h-screen">
       <ArticleHero article={article} />
       <ArticleBody article={article} className="w-full rounded-md mb-2" />
+      {article.attachments && article.attachments.length > 0 && (
+        <div className="mx-auto max-w-4xl px-4 py-8">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Attachments</h2>
+          <ul className="space-y-3">
+            {article.attachments.map((attachment) => (
+              <li key={attachment.url} className="flex items-center justify-between rounded border border-border/60 bg-card p-3">
+                <span className="text-sm text-gray-700 dark:text-gray-200">
+                  {attachment.label || attachment.url.split('/').pop()} ({attachment.mediaType})
+                </span>
+                <a
+                  href={attachment.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-warm font-medium underline-offset-2 hover:underline"
+                >
+                  Download
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="mx-auto max-w-4xl px-4 py-8">
         <div className="text-center">
           {prevArticle && <Link href={`/blog/${prevArticle.slug}`} className="text-warm hover:text-warm/80">← Previous: {prevArticle.title}</Link>}

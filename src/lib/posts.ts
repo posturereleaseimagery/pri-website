@@ -1,12 +1,19 @@
 import fs from 'fs/promises';
 import path from 'path';
 
+export interface Attachment {
+  url: string;
+  label?: string;
+  mediaType: string;
+}
+
 export interface Post {
   id: string;
   title: string;
   content: string;
   type: 'article' | 'exercise' | 'tidbit';
   images?: string[];
+  attachments?: Attachment[];
   tags?: string[];
   createdAt: string;
   updatedAt: string;

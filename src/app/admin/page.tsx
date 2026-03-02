@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import type { Attachment } from '@/lib/posts';
 
 const PostType = { article: 'article', exercise: 'exercise', tidbit: 'tidbit' } as const;
 
@@ -11,6 +12,7 @@ type Post = {
   type: typeof PostType[keyof typeof PostType];
   images?: string[];
   tags?: string[];
+  attachments?: Attachment[];
   createdAt: string;
   updatedAt: string;
 };
@@ -30,6 +32,8 @@ export default function Admin() {
   const [existingImages, setExistingImages] = useState<string[]>([]);
   const [filterType, setFilterType] = useState<'all' | typeof PostType[keyof typeof PostType]>('all');
   const [filterYear, setFilterYear] = useState<'all' | number>('all');
+  const [existingAttachments, setExistingAttachments] = useState<Attachment[]>([]);
+  const [selectedAttachments, setSelectedAttachments] = useState<File[]>([]);
   const editorRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -44,13 +48,14 @@ export default function Admin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('handleSubmit called', { editingId, selectedFiles, existingImages, form });
+    console.log('handleSubmit called', { editingId, selectedFiles, existingImages, existingAttachments, selectedAttachments, form });
     const url = editingId ? `/api/posts/${editingId}` : '/api/posts';
     const method = editingId ? 'PUT' : 'POST';
     const tags = form.tags.split(',').map(t => t.trim()).filter(t => t);
     let res;
     try {
-      if (selectedFiles.length === 0) {
+      const needsFormData = selectedFiles.length > 0 || selectedAttachments.length > 0;
+      if (!needsFormData) {
         // Use JSON for creates/updates without image
         console.log('Sending JSON', { url, method, body: form });
         res = await fetch(url, {
@@ -61,6 +66,7 @@ export default function Admin() {
             content: form.content,
             type: form.type,
             images: existingImages,
+            attachments: existingAttachments,
             tags,
             date: form.date,
           }),
@@ -73,7 +79,9 @@ export default function Admin() {
         formData.append('type', form.type);
         formData.append('date', form.date);
         formData.append('existingImages', JSON.stringify(existingImages));
+        formData.append('existingAttachments', JSON.stringify(existingAttachments));
         selectedFiles.forEach((file) => formData.append('images', file));
+        selectedAttachments.forEach((file) => formData.append('attachments', file));
         formData.append('tags', JSON.stringify(tags));
         console.log('Sending FormData', { url, method, formData });
         res = await fetch(url, {
@@ -98,6 +106,8 @@ export default function Admin() {
     setForm({ title: '', content: '', type: 'article', date: initialDate, tags: '' });
     setSelectedFiles([]);
     setExistingImages([]);
+    setExistingAttachments([]);
+    setSelectedAttachments([]);
     setEditingId(null);
     fetchPosts();
   };
@@ -113,6 +123,20 @@ export default function Admin() {
     setEditingId(post.id);
     setSelectedFiles([]);
     setExistingImages(post.images || []);
+    setExistingAttachments(post.attachments || []);
+  };
+
+  const handleAttachFiles = (files: FileList | null) => {
+    if (!files) return;
+    setSelectedAttachments((prev) => [...prev, ...Array.from(files)]);
+  };
+
+  const removeExistingAttachment = (url: string) => {
+    setExistingAttachments((prev) => prev.filter((attachment) => attachment.url !== url));
+  };
+
+  const removeSelectedAttachment = (index: number) => {
+    setSelectedAttachments((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleFormat = (command: string, value?: string) => {
@@ -201,6 +225,50 @@ export default function Admin() {
           <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
             {existingImages.map((img) => (
               <img key={img} src={img} alt="thumbnail" className="h-10 w-10 rounded object-cover" />
+            ))}
+          </div>
+        )}
+        <label className="block text-sm font-medium">PDF Attachments</label>
+        <input
+          type="file"
+          accept="application/pdf"
+          multiple
+          onChange={(e) => handleAttachFiles(e.target.files)}
+          className="p-2 border rounded"
+        />
+        {existingAttachments.length > 0 && (
+          <div className="space-y-1 text-xs text-muted-foreground">
+            <p className="font-semibold">Attached PDFs</p>
+            {existingAttachments.map((attachment) => (
+              <div key={attachment.url} className="flex items-center justify-between gap-2">
+                <a href={attachment.url} target="_blank" rel="noreferrer" className="underline">
+                  {attachment.label || attachment.url.split('/').pop()}
+                </a>
+                <button
+                  type="button"
+                  onClick={() => removeExistingAttachment(attachment.url)}
+                  className="text-xs text-red-500"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        {selectedAttachments.length > 0 && (
+          <div className="space-y-1 text-xs text-muted-foreground">
+            <p className="font-semibold">New attachments</p>
+            {selectedAttachments.map((attachment, index) => (
+              <div key={`${attachment.name}-${index}`} className="flex items-center justify-between gap-2">
+                <span>{attachment.name}</span>
+                <button
+                  type="button"
+                  onClick={() => removeSelectedAttachment(index)}
+                  className="text-xs text-red-500"
+                >
+                  Remove
+                </button>
+              </div>
             ))}
           </div>
         )}

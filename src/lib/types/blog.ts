@@ -1,3 +1,9 @@
+export interface Attachment {
+  url: string
+  label?: string
+  mediaType: string
+}
+
 export type Article = {
   id: string
   title: string
@@ -9,6 +15,7 @@ export type Article = {
   readingTime: number
   content: string // Rich text content
   featured: boolean
+  attachments?: Attachment[]
 }
 
 export type Tidbit = {

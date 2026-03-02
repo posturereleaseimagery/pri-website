@@ -1,14 +1,14 @@
+import { Tidbit } from "@/lib/types/blog";
 import Link from "next/link";
-import { Post } from "@/lib/posts";
 import { TagPill } from "./TagPill";
 
 interface TidbitCardProps {
-  tidbit: Post;
+  tidbit: Tidbit;
 }
 
 export function TidbitCard({ tidbit }: TidbitCardProps) {
-  const hasImage = tidbit.images && tidbit.images.length > 0;
-  const imageUrl = hasImage ? `/images/${tidbit.images[0]}` : null;
+  const hasImage = tidbit.imageUrl;
+  const imageUrl = hasImage ? tidbit.imageUrl : null;
 
   return (
     <Link
@@ -26,7 +26,7 @@ export function TidbitCard({ tidbit }: TidbitCardProps) {
       )}
 
       <p className="text-sm leading-relaxed text-foreground">
-        {tidbit.content}
+        {tidbit.text}
       </p>
 
       <div className="mt-3 flex items-center justify-between">
@@ -36,7 +36,7 @@ export function TidbitCard({ tidbit }: TidbitCardProps) {
           ))}
         </div>
         <div className="text-xs text-muted-foreground">
-          {new Date(tidbit.createdAt).toLocaleDateString('en-US', {
+          {new Date(tidbit.publishDate).toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric'
           })}

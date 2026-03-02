@@ -21,7 +21,7 @@ function generateSlug(post: Post) {
 function toArticle(post: Post): Article {
   const slug = generateSlug(post);
   const publishDate = post.createdAt.split('T')[0];
-  const coverImage = post.images?.[0];
+  const coverImage = post.images?.[0] ?? '';
   const excerpt = post.content.length > 160 ? `${post.content.slice(0, 160)}...` : post.content;
   const readingTime = Math.max(1, Math.round(post.content.length / 200));
   const content = `<p>${post.content.replace(/\n+/g, '</p><p>')}</p>`;
@@ -55,18 +55,19 @@ export function toTidbit(post: Post): Tidbit {
     publishDate: post.createdAt.split('T')[0],
     tags: [],
     imageUrl: post.images?.[0],
-    content: post.content,
   };
 }
 
-export async function getTidbitById(id: string): Promise<Post | null> {
+export async function getTidbitById(id: string): Promise<Tidbit | null> {
   const tidbits = await getAllTidbits();
   return tidbits.find(t => t.id === id) || null;
 }
 
-export async function getAllTidbits(): Promise<Post[]> {
+export async function getAllTidbits(): Promise<Tidbit[]> {
   const posts = await readPosts();
-  return posts.filter(post => post.type === 'tidbit');
+  return posts
+    .filter(post => post.type === 'tidbit')
+    .map(toTidbit);
 }
 
 export function toExercise(post: Post) {

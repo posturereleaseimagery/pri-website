@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { EmailSubmissionData } from '../../../self-typing/types';
+import { EmailSubmissionData } from '../../self-typing/types';
 
 export async function POST(request: NextRequest) {
   try {

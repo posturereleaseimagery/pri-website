@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Article } from "@/lib/types/blog";
 
 export function ArticleCard({ article }: { article: Article }) {
   return (

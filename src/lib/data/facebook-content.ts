@@ -1,4 +1,4 @@
-import { Article, Tidbit } from "../lib/types/blog";
+import { Article, Tidbit } from "@/lib/types/blog";
 
 export const facebookArticles: Article[] = [
   {

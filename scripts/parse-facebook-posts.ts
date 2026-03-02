@@ -127,21 +127,21 @@ function displayParsedPosts() {
       console.log(`Content: ${post.content.substring(0, 150)}${post.content.length > 150 ? '...' : ''}`);
     }
 
-    if (post.attachments.events.length > 0) {
+    if (post.attachments.events && post.attachments.events.length > 0) {
       console.log(`Events: ${post.attachments.events.length}`);
       post.attachments.events.forEach(event => {
         console.log(`  - ${event.name}`);
       });
     }
 
-    if (post.attachments.externalLinks.length > 0) {
+    if (post.attachments.externalLinks && post.attachments.externalLinks.length > 0) {
       console.log(`External Links: ${post.attachments.externalLinks.length}`);
       post.attachments.externalLinks.forEach(link => {
         console.log(`  - ${link}`);
       });
     }
 
-    if (post.attachments.media.length > 0) {
+    if (post.attachments.media && post.attachments.media.length > 0) {
       console.log(`Media Files: ${post.attachments.media.length}`);
       post.attachments.media.forEach(media => {
         console.log(`  - ${media.uri || 'Unknown'}`);

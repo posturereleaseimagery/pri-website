@@ -23,9 +23,9 @@ const facebookPosts: FacebookPost[] = JSON.parse(fs.readFileSync(facebookDataPat
 
 // Extract posts with analysis
 const analyzedPosts: PostWithContent[] = facebookPosts.map(post => {
-  const hasTextContent = post.data && post.data.some((item: any) =>
+  const hasTextContent = Boolean(post.data && post.data.some((item: any) =>
     item.post && item.post.trim().length > 0
-  );
+  ));
 
   const postText = hasTextContent ?
     post.data!.find((item: any) => item.post)?.post : undefined;

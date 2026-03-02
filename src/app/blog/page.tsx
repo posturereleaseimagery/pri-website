@@ -12,7 +12,7 @@ export default async function BlogPage() {
   );
   const featuredArticles = allArticles.slice(0, 3);
   const allTidbits = (await getAllTidbits()).sort((a, b) =>
-    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
   );
   const exercises = (await getAllExercises()).sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()

@@ -1,130 +1,103 @@
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { EmailCapture } from "@/components/email-capture";
+import { BookOpen, Zap } from "lucide-react";
+import { BlogLayout } from "@/components/blog/BlogLayout";
+import { FeaturedArticleCard } from "@/components/blog/FeaturedArticleCard";
+import { TidbitCard } from "@/components/blog/TidbitCard";
+import { getAllExercises, getAllBlogArticles, getAllTidbits } from "@/lib/blog-posts";
+import { ExerciseCard } from "@/components/blog/ExerciseCard";
 
-const posts = [
-  {
-    slug: "why-posture-is-not-alignment",
-    title: "Why Posture Is Not Alignment",
-    excerpt:
-      "Most approaches to posture treat it as a mechanical problem — bones stacked in the right order. PRI takes a fundamentally different view.",
-    date: "2025-12-15",
-    readTime: "5 min",
-    tags: ["Beginners", "Concept"],
-  },
-  {
-    slug: "the-dorsal-ventral-distinction",
-    title: "The Dorsal-Ventral Distinction: An Evolutionary Perspective",
-    excerpt:
-      "The oldest organizational principle in the vertebrate body is the distinction between back and front. Understanding this changes everything about how we approach posture.",
-    date: "2025-11-28",
-    readTime: "8 min",
-    tags: ["Professional", "Evolution"],
-  },
-  {
-    slug: "imagery-is-not-visualization",
-    title: "Imagery Is Not Visualization",
-    excerpt:
-      "When PRI uses the word 'imagery,' it means something quite specific — and quite different from what most people assume.",
-    date: "2025-11-10",
-    readTime: "4 min",
-    tags: ["Beginners", "Practice"],
-  },
-  {
-    slug: "raymond-dart-and-the-double-spiral",
-    title: "Raymond Dart and the Double Spiral",
-    excerpt:
-      "The anatomist who discovered the Taung Child spent decades studying posture. His insights remain revolutionary — and largely unknown.",
-    date: "2025-10-22",
-    readTime: "10 min",
-    tags: ["Professional", "Lineage"],
-  },
-  {
-    slug: "the-lamb-and-the-egg",
-    title: "The Lamb and the Egg: Working with Archetypal Imagery",
-    excerpt:
-      "Two of PRI's core images — the newborn lamb and the egg — are not metaphors. They are perceptual tools rooted in evolutionary biology.",
-    date: "2025-10-05",
-    readTime: "6 min",
-    tags: ["Concept", "Practice"],
-  },
-  {
-    slug: "alexander-technique-and-pri",
-    title: "Alexander Technique and PRI: Continuity and Departure",
-    excerpt:
-      "PRI owes a deep debt to F.M. Alexander. But it also departs from the Alexander tradition in significant ways.",
-    date: "2025-09-18",
-    readTime: "7 min",
-    tags: ["Professional", "Lineage"],
-  },
-];
+export default async function BlogPage() {
+  const allArticles = (await getAllBlogArticles()).sort(
+    (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+  );
+  const featuredArticles = allArticles.slice(0, 3);
+  const allTidbits = (await getAllTidbits()).sort((a, b) =>
+    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+  const exercises = (await getAllExercises()).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
-
-export default function BlogPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="mx-auto max-w-2xl text-center">
-        <p className="mb-3 text-sm font-medium uppercase tracking-widest text-warm">
-          Blog
-        </p>
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Articles & Insights
-        </h1>
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Explorations of posture, perception, evolution, and somatic practice.
-          Written for both beginners and professionals.
-        </p>
+    <BlogLayout>
+      {/* Hero Section */}
+      <div className="border-b border-border/60 bg-gradient-to-br from-sky-50 via-white to-green-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 pb-16 pt-20">
+        <div className="mx-auto max-w-4xl text-center">
+          <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+            The PRI Journal
+          </h1>
+          <p className="mt-4 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+            Ideas, imagery, and evolutionary posture insights. Deep thinking meets rapid noticing.
+          </p>
+        </div>
       </div>
 
-      <div className="mx-auto mt-12 max-w-3xl space-y-4">
-        {posts.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            className="group block rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
-          >
-            <div className="flex flex-wrap items-center gap-2">
-              {post.tags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="secondary"
-                  className="text-xs font-normal"
-                >
-                  {tag}
-                </Badge>
+      <div className="py-16">
+        {/* Featured Articles Section */}
+        {featuredArticles.length > 0 && (
+          <section className="mb-16">
+            <div className="mb-8 flex items-center justify-between">
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Featured Articles
+              </h2>
+              <Link
+                href="/blog/articles"
+                className="flex items-center gap-2 text-sm text-warm hover:text-warm/80"
+              >
+                <BookOpen className="h-4 w-4" />
+                View all articles
+              </Link>
+            </div>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {featuredArticles.map((article) => (
+                <FeaturedArticleCard key={article.id} article={article} />
               ))}
             </div>
-            <h2 className="mt-3 text-lg font-semibold group-hover:text-warm">
-              {post.title}
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {post.excerpt}
-            </p>
-            <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
-              <span>{formatDate(post.date)}</span>
-              <span className="flex items-center gap-1">
-                <Clock className="h-3 w-3" />
-                {post.readTime}
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
+          </section>
+        )}
 
-      <div className="mx-auto mt-12 max-w-xl">
-        <EmailCapture
-          heading="New articles in your inbox"
-          description="Subscribe to receive new articles on posture, perception, and somatic practice."
-        />
+        {/* Exercises Section */}
+        {exercises.length > 0 && (
+          <section className="mb-16">
+            <div className="mb-8 flex items-center justify-between">
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Exercises</h2>
+              <Link
+                href="/blog/exercises"
+                className="flex items-center gap-2 text-sm text-warm hover:text-warm/80"
+              >
+                View all exercises
+              </Link>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              {exercises.map((exercise) => (
+                <ExerciseCard key={exercise.id} exercise={exercise} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Tidbits Stream */}
+        <section>
+          <div className="mb-8 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+              Recent Tidbits
+            </h2>
+            <Link
+              href="/blog/tidbits"
+              className="flex items-center gap-2 text-sm text-warm hover:text-warm/80"
+            >
+              <Zap className="h-4 w-4" />
+              View all tidbits
+            </Link>
+          </div>
+          <div className="space-y-4">
+            {allTidbits.slice(0, 5).map((tidbit) => (
+              <TidbitCard key={tidbit.id} tidbit={tidbit} />
+            ))}
+          </div>
+        </section>
+
       </div>
-    </div>
+    </BlogLayout>
   );
 }

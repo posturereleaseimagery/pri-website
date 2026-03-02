@@ -56,11 +56,11 @@ export function EmailCapture({
   }
 
   return (
-    <section className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+    <section className="rounded-xl border border-border bg-card shadow-xl overflow-hidden">
       {showBanner && (
         <div className="w-full">
           <img 
-            src="/images/WebsiteBanner2.jpg" 
+            src="/images/image22.png" 
             alt="Website Banner"
             className="w-full h-auto object-cover"
           />

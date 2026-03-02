@@ -36,7 +36,7 @@ const footerLinks = [
     title: "About",
     links: [
       { label: "John Appleton", href: "/about" },
-      { label: "Lineage", href: "/about/lineage" },
+      { label: "History", href: "/about/history" },
       { label: "The Method", href: "/about/method" },
     ],
   },
@@ -44,12 +44,12 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/60 bg-secondary/50">
+    <footer className="border-t border-border/60 bg-[#204263]">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {footerLinks.map((section) => (
             <div key={section.title}>
-              <h3 className="mb-3 text-sm font-semibold text-foreground">
+              <h3 className="mb-3 text-sm font-semibold text-white/90">
                 {section.title}
               </h3>
               <ul className="space-y-2">
@@ -57,7 +57,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-sm text-white/70 transition-colors hover:text-white"
                     >
                       {link.label}
                     </Link>
@@ -76,11 +76,11 @@ export function Footer() {
               height={50} 
               className="h-12 w-12"
             />
-            <span className="text-sm font-medium text-primary">
+            <span className="text-sm font-medium text-white/90">
               Posture Release Imagery
             </span>
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-white/60">
             Developed by John Appleton. All rights reserved.
           </p>
         </div>

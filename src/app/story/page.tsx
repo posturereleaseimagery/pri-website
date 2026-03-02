@@ -385,7 +385,7 @@ export default function StoryPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <Link
                 href="/experience/first-touch"
-                className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+                className="group rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
               >
                 <p className="text-xs font-medium uppercase tracking-wider text-warm/60">
                   Feel More
@@ -403,7 +403,7 @@ export default function StoryPage() {
 
               <Link
                 href="/learn/surfaces"
-                className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+                className="group rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
               >
                 <p className="text-xs font-medium uppercase tracking-wider text-sage/70">
                   Understand More
@@ -421,7 +421,7 @@ export default function StoryPage() {
 
               <Link
                 href="/book"
-                className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+                className="group rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
               >
                 <p className="text-xs font-medium uppercase tracking-wider text-primary/40">
                   Study
@@ -440,7 +440,7 @@ export default function StoryPage() {
 
               <Link
                 href="/courses"
-                className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+                className="group rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
               >
                 <p className="text-xs font-medium uppercase tracking-wider text-primary/40">
                   Train

@@ -445,7 +445,7 @@ export default function Story2Page() {
             <div className="grid gap-4 sm:grid-cols-2">
               <Link
                 href="/story"
-                className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+                className="group rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
               >
                 <p className="text-xs font-medium uppercase tracking-wider text-warm/60">
                   Feel It
@@ -462,7 +462,7 @@ export default function Story2Page() {
               </Link>
               <Link
                 href="/experience/first-touch"
-                className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+                className="group rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
               >
                 <p className="text-xs font-medium uppercase tracking-wider text-warm/60">
                   Experience
@@ -479,7 +479,7 @@ export default function Story2Page() {
               </Link>
               <Link
                 href="/learn/evolution"
-                className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+                className="group rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
               >
                 <p className="text-xs font-medium uppercase tracking-wider text-primary/40">
                   Study
@@ -496,7 +496,7 @@ export default function Story2Page() {
               </Link>
               <Link
                 href="/book"
-                className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+                className="group rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
               >
                 <p className="text-xs font-medium uppercase tracking-wider text-primary/40">
                   Read

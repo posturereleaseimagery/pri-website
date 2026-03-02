@@ -66,7 +66,7 @@ export default function ExperiencePage() {
           <Link
             key={exp.slug}
             href={`/experience/${exp.slug}`}
-            className="group flex items-center gap-5 rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+            className="group flex items-center gap-5 rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
           >
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-warm/10">
               <exp.icon className="h-6 w-6 text-warm" />

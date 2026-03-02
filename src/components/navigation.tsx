@@ -39,7 +39,7 @@ const navItems = [
     href: "/about",
     children: [
       { label: "John Appleton", href: "/about" },
-      { label: "Lineage", href: "/about/lineage" },
+      { label: "History", href: "/about/history" },
       { label: "The Method", href: "/about/method" },
     ],
   },
@@ -51,9 +51,9 @@ export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
+    <header className="sticky top-0 z-50 w-full h-[150px] bg-[#204263] border-b-6 border-[#A98E6F] flex items-center">
+      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
+        <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80 mr-8">
           <Image 
             src="/logo.png" 
             alt="Posture Release Imagery Logo" 
@@ -61,7 +61,7 @@ export function Navigation() {
             height={50} 
             className="h-12 w-12"
           />
-          <span className="text-lg font-semibold tracking-tight text-primary">
+          <span className="text-lg font-semibold tracking-tight text-white/80">
             Posture Release Imagery
           </span>
         </Link>
@@ -77,7 +77,7 @@ export function Navigation() {
             >
               <Link
                 href={item.href}
-                className="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
+                className="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/10 hover:text-white"
               >
                 {item.label}
               </Link>
@@ -87,7 +87,7 @@ export function Navigation() {
                     <Link
                       key={child.href}
                       href={child.href}
-                      className="block rounded-md px-3 py-2 text-sm text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+                      className="block rounded-md px-3 py-2 text-sm text-[#204263] hover:bg-white/10 hover:text-[#204263]"
                     >
                       {child.label}
                     </Link>

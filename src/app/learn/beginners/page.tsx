@@ -63,7 +63,7 @@ export default function BeginnersPage() {
         {steps.map((step, i) => (
           <div
             key={i}
-            className="rounded-xl border border-border/60 bg-card p-6 shadow-sm"
+            className="rounded-xl border border-border/60 bg-card p-6 shadow-xl"
           >
             <div className="flex items-start gap-4">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sage/10 text-sm font-semibold text-sage">

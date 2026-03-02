@@ -49,7 +49,7 @@ export default function MethodPage() {
           {principles.map((principle) => (
             <div
               key={principle.title}
-              className="rounded-xl border border-border/60 bg-card p-6 shadow-sm"
+              className="rounded-xl border border-border/60 bg-card p-6 shadow-xl"
             >
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-warm/10">

@@ -74,7 +74,7 @@ export default function ContactPage() {
                 rows={6}
                 placeholder="Your message..."
                 required
-                className="w-full rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="w-full rounded-md border border-input bg-card px-3 py-2 text-sm shadow-xl placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               />
             </div>
             <Button type="submit" className="bg-warm text-warm-foreground hover:bg-warm/90">
@@ -84,7 +84,7 @@ export default function ContactPage() {
           </form>
         )}
 
-        <div className="mt-12 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
+        <div className="mt-12 rounded-xl border border-border/60 bg-card p-6 shadow-xl">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warm/10">
               <Mail className="h-5 w-5 text-warm" />

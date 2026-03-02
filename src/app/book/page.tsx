@@ -27,19 +27,34 @@ const whoFor = [
 export default function BookPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="mx-auto max-w-2xl text-center">
-        <p className="mb-3 text-sm font-medium uppercase tracking-widest text-warm">
-          The Book
-        </p>
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Posture Release Imagery
-        </h1>
-        <p className="mt-2 text-lg text-muted-foreground">by John Appleton</p>
-        <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          The complete guide to the PRI method — from the foundational sensation work
-          through the evolutionary science, the Four Type Theory, and practical applications
-          for both personal practice and professional work.
-        </p>
+      {/* Hero Section with Image */}
+      <div className="mx-auto max-w-5xl">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+          {/* Text Content */}
+          <div className="text-center lg:text-left">
+            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-warm">
+              The Book
+            </p>
+            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              Posture Release Imagery
+            </h1>
+            <p className="mt-2 text-lg text-muted-foreground">by John Appleton</p>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
+              The complete guide to the PRI method — from the foundational sensation work
+              through the evolutionary science, the Four Type Theory, and practical applications
+              for both personal practice and professional work.
+            </p>
+          </div>
+
+          {/* Book Image */}
+          <div className="flex justify-center lg:justify-end">
+            <img
+              src="/images/Cover_Front.jpg"
+              alt="Posture Release Imagery Book"
+              className="h-auto w-auto max-w-sm rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
       </div>
 
       <div className="mx-auto mt-12 max-w-2xl">
@@ -89,7 +104,7 @@ export default function BookPage() {
         </div>
 
         {/* Purchase CTA */}
-        <div className="mt-12 rounded-xl border border-border/60 bg-card p-8 text-center shadow-sm">
+        <div className="mt-12 rounded-xl border border-border/60 bg-card p-8 text-center shadow-xl">
           <BookOpen className="mx-auto h-8 w-8 text-warm" />
           <h3 className="mt-4 text-xl font-semibold">Get the Book</h3>
           <p className="mt-2 text-sm text-muted-foreground">

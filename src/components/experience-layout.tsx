@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,22 @@ export function ExperienceLayout({
 }: ExperienceLayoutProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [started, setStarted] = useState(false);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (started) {
+        if (event.key === 'ArrowLeft' && currentStep > 0) {
+          setCurrentStep(currentStep - 1);
+        } else if (event.key === 'ArrowRight' && currentStep < steps.length - 1) {
+          setCurrentStep(currentStep + 1);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [started, currentStep, steps.length]);
 
   if (!started) {
     return (
@@ -77,7 +93,7 @@ export function ExperienceLayout({
           <img 
             src={image} 
             alt={title}
-            className="h-auto w-auto max-w-[700px] rounded-[25px]"
+            className="h-auto w-[400px] rounded-[25px]"
           />
         </div>
       )}

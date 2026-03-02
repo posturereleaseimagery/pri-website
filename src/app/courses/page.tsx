@@ -63,7 +63,7 @@ export default function CoursesPage() {
         {courses.map((course) => (
           <div
             key={course.slug}
-            className="flex flex-col rounded-xl border border-border/60 bg-card shadow-sm"
+            className="flex flex-col rounded-xl border border-border/60 bg-card shadow-xl"
           >
             <div className="p-8">
               <div className={`flex h-12 w-12 items-center justify-center rounded-full ${

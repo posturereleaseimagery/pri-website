@@ -53,7 +53,7 @@ export default function LearnPage() {
       <div className="mt-12 grid gap-6 md:grid-cols-2">
         <Link
           href="/learn/beginners"
-          className="group rounded-xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:border-sage/40 hover:shadow-md"
+          className="group rounded-xl border border-border/60 bg-card p-8 shadow-xl transition-all hover:border-sage/40 hover:shadow-md"
         >
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sage/10">
             <Users className="h-6 w-6 text-sage" />
@@ -69,7 +69,7 @@ export default function LearnPage() {
         </Link>
         <Link
           href="/learn/professionals"
-          className="group rounded-xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+          className="group rounded-xl border border-border/60 bg-card p-8 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
         >
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-warm/10">
             <GraduationCap className="h-6 w-6 text-warm" />

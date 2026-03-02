@@ -2,59 +2,24 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, BookOpen, GraduationCap, Users, Layers, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EmailCapture } from "@/components/email-capture";
+import { readPosts } from "../lib/posts";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await readPosts();
+  const latestPosts = posts
+    .slice()
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  const latestPost = latestPosts[0] ?? null;
   return (
     <>
       {/* Hero — Experiential Invitation */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-warm/5 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-20 sm:px-6 sm:pt-28">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 text-center md:text-left">
-              <p className="mb-4 text-sm font-medium uppercase tracking-widest text-warm">
-                A 30-Second Invitation
-              </p>
-              <h1 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
-                Close your eyes.
-                <br />
-                <span className="text-muted-foreground">Feel the back of your body.</span>
-              </h1>
-              <div className="mt-8 max-w-lg space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                <p>
-                  Notice the surface that touches the chair, the air, the fabric of your clothing.
-                  The whole back of you — from your heels to the crown of your head.
-                </p>
-                <p>
-                  Now notice the front. Your face, your chest, your palms, your belly.
-                  Feel how different these two surfaces are.
-                </p>
-                <p className="font-medium text-foreground">
-                  You have just begun Posture Release Imagery.
-                </p>
-              </div>
-              <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-start md:justify-start">
-                <Button asChild size="lg" className="bg-warm text-warm-foreground hover:bg-warm/90">
-                  <Link href="/story">
-                    See the Visual Story
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/experience/first-touch">
-                    Try a Guided Experience
-                  </Link>
-                </Button>
-              </div>
-            </div>
-            <div className="flex-shrink-0 w-[500px]">
-              <img 
-                src="/images/chair.png" 
-                alt="Posture Release Imagery"
-                className="w-full h-auto object-contain rounded-[25px]"
-              />
-            </div>
-          </div>
+        <div className="relative">
+          <img 
+            src="/images/WebsiteBanner2.jpg" 
+            alt="Posture Release Imagery"
+            className="w-full h-auto object-cover"
+          />
         </div>
       </section>
 
@@ -65,7 +30,7 @@ export default function Home() {
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
               What is Posture Release Imagery?
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg text-left">
               PRI is a somatic education method developed by John Appleton. It teaches you to
               change your posture and embodied experience through guided mental imagery alone —
               no exercises, no manipulation, no equipment. Just your attention and your imagination.
@@ -94,7 +59,7 @@ export default function Home() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-xl border border-border/60 bg-card shadow-sm overflow-hidden"
+                className="rounded-xl border border-border/60 bg-card shadow-xl overflow-hidden"
               >
                 {item.image && (
                   <div className="w-full">
@@ -116,7 +81,7 @@ export default function Home() {
       </section>
 
       {/* Two Paths */}
-      <section className="border-t border-border/60">
+      <section className="border-t border-border/60 bg-secondary/50">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -126,17 +91,11 @@ export default function Home() {
               Whether you are new to somatic work or a seasoned practitioner, there is a path for you.
             </p>
           </div>
-          <div className="mt-10 mb-10 flex justify-center">
-            <img 
-              src="/images/image22.png" 
-              alt="Two Ways In"
-              className="w-full h-auto object-cover rounded-xl max-w-3xl"
-            />
-          </div>
+
           <div className="grid gap-6 md:grid-cols-2">
             <Link
               href="/learn/beginners"
-              className="group rounded-xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+              className="group rounded-xl border border-border/60 bg-card p-8 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sage/10">
                 <Users className="h-6 w-6 text-sage" />
@@ -153,7 +112,7 @@ export default function Home() {
             </Link>
             <Link
               href="/learn/professionals"
-              className="group rounded-xl border border-border/60 bg-card p-8 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+              className="group rounded-xl border border-border/60 bg-card p-8 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-warm/10">
                 <GraduationCap className="h-6 w-6 text-warm" />
@@ -221,7 +180,7 @@ export default function Home() {
       <section className="border-t border-border/60">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-xl border border-border/60 bg-card shadow-sm overflow-hidden">
+            <div className="rounded-xl border border-border/60 bg-card shadow-xl overflow-hidden">
               <div className="flex flex-col md:flex-row h-full">
                 <div className="flex-1 p-8">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warm/10">
@@ -246,7 +205,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="rounded-xl border border-border/60 bg-card shadow-sm overflow-hidden">
+            <div className="rounded-xl border border-border/60 bg-card shadow-xl overflow-hidden">
               <div className="flex flex-col md:flex-row">
                 <div className="flex-1 p-8">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sage/10">
@@ -282,6 +241,61 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Blog Posts */}
+      <section className="border-t border-border/60 bg-secondary/30">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Blog</h2>
+            <p className="mt-2 text-muted-foreground">Latest from the journal</p>
+          </div>
+          {latestPost && (
+            <article className="mx-auto mt-10 max-w-3xl rounded-3xl border border-border/40 bg-card p-8 shadow-xl">
+              <div className="flex items-center justify-between text-sm text-muted-foreground">
+                <span>
+                  {new Date(latestPost.createdAt).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </span>
+                <span className="uppercase tracking-wide text-[11px]">{latestPost.type}</span>
+              </div>
+              <h3 className="mt-4 text-3xl font-semibold text-foreground">{latestPost.title}</h3>
+              {latestPost.images && latestPost.images.length > 0 && (
+                <img
+                  src={latestPost.images[0]}
+                  alt={latestPost.title}
+                  className="mt-6 w-full h-auto rounded-2xl object-cover"
+                />
+              )}
+              <div className="mt-6 text-sm leading-relaxed text-foreground">
+                {latestPost.type === 'article' ? (
+                  <p>
+                    {latestPost.content.slice(0, 500)}
+                    {latestPost.content.length > 500 ? '…' : ''}
+                  </p>
+                ) : (
+                  <p>
+                    {latestPost.content.slice(0, 300)}
+                    {latestPost.content.length > 300 ? '…' : ''}
+                  </p>
+                )}
+              </div>
+              <div className="mt-6 flex justify-between items-center">
+                <Link href={`/blog/${latestPost.id}`} className="text-warm hover:text-warm/80 font-semibold">
+                  Read the latest post
+                </Link>
+                <Link href="/admin" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+                  Manage Posts
+                </Link>
+              </div>
+            </article>
+          )}
+        </div>
+      </section>
+
+      {/* ... */}
     </>
   );
 }

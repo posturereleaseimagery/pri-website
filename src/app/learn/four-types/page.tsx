@@ -64,7 +64,7 @@ export default function FourTypesPage() {
               {types.map((type) => (
                 <div
                   key={type.name}
-                  className="rounded-xl border border-border/60 bg-card p-5 shadow-sm"
+                  className="rounded-xl border border-border/60 bg-card p-5 shadow-xl"
                 >
                   <div className="flex items-center gap-3">
                     <h3 className="font-semibold">{type.name}</h3>

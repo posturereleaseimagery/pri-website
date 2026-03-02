@@ -59,7 +59,7 @@ export default function ProfessionalsPage() {
       </div>
 
       {/* Who this is for */}
-      <div className="mx-auto mt-12 max-w-2xl rounded-xl border border-border/60 bg-card p-8 shadow-sm">
+      <div className="mx-auto mt-12 max-w-2xl rounded-xl border border-border/60 bg-card p-8 shadow-xl">
         <h2 className="text-lg font-semibold">Relevant for</h2>
         <div className="mt-4 flex flex-wrap gap-2">
           {relevantFor.map((item) => (
@@ -79,7 +79,7 @@ export default function ProfessionalsPage() {
           <Link
             key={topic.href}
             href={topic.href}
-            className="group rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:border-warm/40 hover:shadow-md"
+            className="group rounded-xl border border-border/60 bg-card p-6 shadow-xl transition-all hover:border-warm/40 hover:shadow-md"
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warm/10">
               <topic.icon className="h-5 w-5 text-warm" />
